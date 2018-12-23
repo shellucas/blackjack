@@ -44,7 +44,7 @@ public class Player implements User {
     @Override
     public Card hit(int i, Deck deck) {
         Card card = deck.draw();
-//        hands.get(i).addCard(card);
+        hands.get(i).addAndRecalculate(card);
         return card;
     }
     
