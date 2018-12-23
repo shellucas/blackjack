@@ -2,8 +2,8 @@ package com.shelby.blackjack.logic.game;
 
 import com.shelby.blackjack.logic.cards.Shoe;
 import com.shelby.blackjack.logic.cards.hands.Hand;
+import com.shelby.blackjack.logic.users.BlackjackPlayer;
 import com.shelby.blackjack.table.BlackjackTable;
-import com.shellucas.casinoapi.players.Player;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class BlackJackGame {
     private BlackjackTable table;
     private Shoe shoe;
     private Hand dealer;
-    private List<BlackJackPlayer> players;
+    private List<BlackjackPlayer> players;
 
     /**
      * Default game with a maximum accumulation of bets of 10000 and a minimum
@@ -31,7 +31,7 @@ public class BlackJackGame {
         this.dealer = dealer;
         this.players = new ArrayList<>();
     }
-    
+
     public BlackJackGame(Shoe shoe, Hand dealer, double limit, double minimum) {
         this(shoe, dealer);
         this.table = new BlackjackTable(limit, minimum);
@@ -48,13 +48,12 @@ public class BlackJackGame {
     public Hand getDealer() {
         return dealer;
     }
-    
+
     public void start() {
-        for (BlackJackPlayer player : players) {
-       
-        }
+        players.forEach((player) -> {
+            player.newGame();
+            player.getFirstHand();
+        });
     }
-    
-    
 
 }
