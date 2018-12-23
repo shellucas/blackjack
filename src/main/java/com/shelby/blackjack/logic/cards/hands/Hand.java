@@ -1,7 +1,7 @@
 package com.shelby.blackjack.logic.cards.hands;
 
 import com.shelby.blackjack.logic.cards.DefaultCard;
-import com.shelby.blackjack.table.Bet;
+import com.shellucas.casinoapi.bets.Bet;
 import com.shellucas.casinoapi.cards.Card;
 import com.shellucas.casinoapi.cards.CardCollection;
 import java.util.ArrayList;

@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class Deck implements CardCollection {
 
-    private final Deque<DefaultCard> deck;
+    private final Deque<Card> deck;
 
     /**
      * Creates a new Deck with 52 cards one each rank in each suit
@@ -27,7 +27,7 @@ public class Deck implements CardCollection {
         this.deck = new ArrayDeque<>();
         for (Suits suit : Suits.values()) {
             for (Ranks rank : Ranks.values()) {
-                deck.add(CardFactory.getCard(rank, suit));
+                deck.add(new CardFactory().getCard(rank, suit));
             }
         }
     }
@@ -44,7 +44,7 @@ public class Deck implements CardCollection {
      * 
      * @return 
      */
-    public DefaultCard draw() {
+    public Card draw() {
         return deck.removeLast();
     }
     
@@ -63,8 +63,8 @@ public class Deck implements CardCollection {
      * 
      * @return DefaultCard list containing all cards currently in the deck.
      */
-    public List<DefaultCard> getAllCards() {
-        List<DefaultCard> cards = new ArrayList<>();
+    public List<Card> getAllCards() {
+        List<Card> cards = new ArrayList<>();
         cards.addAll(deck);
         return cards;
     }
@@ -87,7 +87,7 @@ public class Deck implements CardCollection {
     @Override
     public String toString() {
         StringBuilder total = new StringBuilder();
-        for (Iterator<DefaultCard> iter = deck.iterator(); iter.hasNext();) {
+        for (Iterator<Card> iter = deck.iterator(); iter.hasNext();) {
             total.append(iter.next().toString()).append("\n");
         }
         return total.toString();

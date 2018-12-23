@@ -1,5 +1,6 @@
 package com.shelby.blackjack.logic.cards;
 
+import com.shellucas.casinoapi.bets.factories.AbstractCardFactory;
 import com.shellucas.casinoapi.cards.Ranks;
 import com.shellucas.casinoapi.cards.Suits;
 
@@ -7,7 +8,7 @@ import com.shellucas.casinoapi.cards.Suits;
  *
  * @author shelby
  */
-public interface CardFactory {
+public class CardFactory implements AbstractCardFactory {
     
     /**
      * Default factory for creating cards of rank and suit.
@@ -16,7 +17,8 @@ public interface CardFactory {
      * @param suit
      * @return 
      */
-    public static DefaultCard getCard(Ranks rank, Suits suit) {
+    @Override
+    public DefaultCard getCard(Ranks rank, Suits suit) {
         switch (rank) {
             case ACE:
                 return new AceCard(suit, rank);

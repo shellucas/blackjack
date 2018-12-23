@@ -5,6 +5,8 @@
  */
 package com.shelby.blackjack.logic.cards;
 
+import com.shellucas.casinoapi.bets.factories.AbstractCardFactory;
+import com.shellucas.casinoapi.cards.Card;
 import com.shellucas.casinoapi.cards.Ranks;
 import com.shellucas.casinoapi.cards.Suits;
 import org.junit.After;
@@ -45,24 +47,26 @@ public class CardFactoryTest {
     @Test
     public void testGetCard() {
         System.out.println("getCard");
+        AbstractCardFactory f = new CardFactory();
+        
         Ranks rank = Ranks.EIGHT;
         Suits suit = Suits.HEARTS;
-        DefaultCard expResult = new DefaultCard(suit, rank);
-        DefaultCard result = CardFactory.getCard(rank, suit);
+        Card expResult = new DefaultCard(suit, rank);
+        Card result = f.getCard(rank, suit);
         assertEquals(expResult, result);
         
         // Test AceCard
         rank = Ranks.ACE;
         suit = Suits.HEARTS;
         expResult = new AceCard(suit, rank);
-        result = CardFactory.getCard(rank, suit);
+        result = f.getCard(rank, suit);
         assertEquals(expResult, result);
         
         // Test FaceCard
         rank = Ranks.KING;
         suit = Suits.SPADES;
         expResult = new FaceCard(suit, rank);
-        result = CardFactory.getCard(rank, suit);
+        result = f.getCard(rank, suit);
         assertEquals(expResult, result);
         
         // TODO review the generated test code and remove the default call to fail.

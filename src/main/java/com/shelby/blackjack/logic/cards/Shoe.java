@@ -1,5 +1,7 @@
 package com.shelby.blackjack.logic.cards;
 
+import com.shellucas.casinoapi.cards.Card;
+
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,7 +14,7 @@ import java.util.List;
  */
 public class Shoe {
 
-    private final Deque<DefaultCard> shoe;
+    private final Deque<Card> shoe;
 
     /**
      * Shoe contains N amount of decks where 0 < N < 9.
@@ -44,7 +46,7 @@ public class Shoe {
      *
      * @return drawn card
      */
-    public DefaultCard deal() {
+    public Card deal() {
         return shoe.getLast();
     }
 

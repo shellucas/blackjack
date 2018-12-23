@@ -5,6 +5,7 @@
  */
 package com.shelby.blackjack.logic.cards;
 
+import com.shellucas.casinoapi.cards.Card;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -57,8 +58,8 @@ public class ShoeTest {
     public void testDeal() {
         System.out.println("deal");
         Shoe instance = null;
-        DefaultCard expResult = null;
-        DefaultCard result = instance.deal();
+        Card expResult = null;
+        Card result = instance.deal();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

@@ -1,6 +1,8 @@
 package com.shelby.blackjack.table;
 
 import com.shelby.blackjack.logic.cards.hands.Hand;
+import com.shellucas.casinoapi.bets.Bet;
+import com.shellucas.casinoapi.bets.tables.BetPlacer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,7 @@ import java.util.List;
  *
  * @author shelby
  */
-public class BlackjackTable {
+public class BlackjackTable implements BetPlacer {
     
     /**
      * Limit for sum of a player's bets.
@@ -35,6 +37,21 @@ public class BlackjackTable {
     public void placeBet(Bet bet, Hand hand) {
         
         this.bets.add(bet);
+    }
+
+    @Override
+    public double getLimit() {
+        return this.limit;
+    }
+
+    @Override
+    public double getMinimum() {
+        return this.minimum;
+    }
+
+    @Override
+    public void placeBet(Bet bet) {
+        bets.add(bet);
     }
     
 }
