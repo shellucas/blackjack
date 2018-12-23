@@ -15,9 +15,11 @@ public class HandHardTotal extends HandTotal {
     @Override
     public int total(Card cardToOmit) {
         int total = 0;
-        for (Card card : super.getHand().getCards()) {
-            if (card != cardToOmit) { total += card.hardValue();  }
-        }
+        total = super.getHand().getCards()
+                .stream()
+                .filter((card) -> card != cardToOmit)
+                .map((card) -> card.hardValue())
+                .reduce(total, Integer::sum);
         return total;
     }
 

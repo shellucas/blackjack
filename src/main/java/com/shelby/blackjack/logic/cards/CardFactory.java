@@ -7,7 +7,7 @@ import com.shelby.blackjack.logic.cards.util.Suits;
  *
  * @author shelby
  */
-public class CardFactory {
+public interface CardFactory {
     
     /**
      * Default factory for creating cards of rank and suit.

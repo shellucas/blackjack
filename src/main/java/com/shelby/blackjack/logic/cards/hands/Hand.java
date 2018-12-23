@@ -104,9 +104,7 @@ public class Hand {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Card card : this.cards) {
-            sb.append(card).append("\n");
-        }
+        this.cards.forEach((card) -> sb.append(card).append("\n") );
         return sb.toString();
     }
 
