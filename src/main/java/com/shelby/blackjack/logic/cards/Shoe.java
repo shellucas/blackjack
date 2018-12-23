@@ -27,7 +27,7 @@ public class Shoe {
         }
         
         this.shoe = new ArrayDeque<>();
-        for (Deck deck : decks) { shoe.addAll(deck.getAllCards()); }
+        decks.forEach((deck) -> shoe.addAll(deck.getAllCards()));
     }
     
     /**
