@@ -4,7 +4,6 @@ import com.shelby.blackjack.logic.cards.util.Ranks;
 import com.shelby.blackjack.logic.cards.util.Suits;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;

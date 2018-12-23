@@ -11,12 +11,12 @@ import java.util.List;
  * @author shelby
  */
 public class Shoe {
-    
+
     private final Deque<Card> shoe;
-    
+
     /**
      * Shoe contains N amount of decks where 0 < N < 9.
-     * 
+     *
      * @param decks
      * @param stopDeal
      */
@@ -25,44 +25,43 @@ public class Shoe {
             throw new IllegalArgumentException("Shoe can only contain N amount "
                     + "of decks where 0 < N < 9.");
         }
-        
+
         this.shoe = new ArrayDeque<>();
         decks.forEach((deck) -> shoe.addAll(deck.getAllCards()));
     }
-    
+
     /**
      * Adds the deck to the list of decks.
-     * @param deck 
+     *
+     * @param deck
      */
     public void addDeck(Deck deck) {
         shoe.addAll(deck.getAllCards());
     }
-    
+
     /**
      * Draws a card from the top of the stack.
-     * 
+     *
      * @return drawn card
      */
     public Card deal() {
         return shoe.getLast();
     }
-    
+
     /**
      * Adds a card back to the shoe.
-     * 
-     * @param card 
+     *
+     * @param card
      */
     public void returnCard(Card card) {
         shoe.addFirst(card);
     }
-    
+
     /**
      * Shuffles the shoe
      */
     public void shuffle() {
         Collections.shuffle(Arrays.asList(shoe));
     }
-    
-    
-    
+
 }
