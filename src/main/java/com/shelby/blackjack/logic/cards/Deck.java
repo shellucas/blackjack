@@ -65,6 +65,11 @@ public class Deck {
         return cards;
     }
 
+    /**
+     * Prints each card in deck in order on a new line.
+     * 
+     * @return 
+     */
     @Override
     public String toString() {
         StringBuilder total = new StringBuilder();
