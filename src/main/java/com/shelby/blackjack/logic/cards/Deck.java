@@ -1,9 +1,13 @@
 package com.shelby.blackjack.logic.cards;
 
-import com.shelby.blackjack.logic.cards.util.Ranks;
-import com.shelby.blackjack.logic.cards.util.Suits;
+import com.shellucas.casinoapi.cards.Card;
+import com.shellucas.casinoapi.cards.CardCollection;
+import com.shellucas.casinoapi.cards.Ranks;
+import com.shellucas.casinoapi.cards.Suits;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
@@ -12,9 +16,9 @@ import java.util.List;
  *
  * @author shelby
  */
-public class Deck {
+public class Deck implements CardCollection {
 
-    private final Deque<Card> deck;
+    private final Deque<DefaultCard> deck;
 
     /**
      * Creates a new Deck with 52 cards one each rank in each suit
@@ -40,7 +44,7 @@ public class Deck {
      * 
      * @return 
      */
-    public Card draw() {
+    public DefaultCard draw() {
         return deck.removeLast();
     }
     
@@ -49,7 +53,7 @@ public class Deck {
      * 
      * @param card 
      */
-    public void returnCard(Card card) {
+    public void returnCard(DefaultCard card) {
         deck.addFirst(card);
     }
     
@@ -57,12 +61,22 @@ public class Deck {
      * Gets all cards in the deck while maintaining the current (perhaps shuffled)
      * order. Does not include cards that are not in the deck (e.g. on table).
      * 
-     * @return Card list containing all cards currently in the deck.
+     * @return DefaultCard list containing all cards currently in the deck.
      */
-    public List<Card> getAllCards() {
-        List<Card> cards = new ArrayList<>();
+    public List<DefaultCard> getAllCards() {
+        List<DefaultCard> cards = new ArrayList<>();
         cards.addAll(deck);
         return cards;
+    }
+
+    @Override
+    public int size() {
+        return deck.size();
+    }
+
+    @Override
+    public List<Card> getCards() {
+        return Arrays.asList((Card[]) deck.toArray());
     }
 
     /**
@@ -73,9 +87,10 @@ public class Deck {
     @Override
     public String toString() {
         StringBuilder total = new StringBuilder();
-        for (Iterator<Card> iter = deck.iterator(); iter.hasNext();) {
+        for (Iterator<DefaultCard> iter = deck.iterator(); iter.hasNext();) {
             total.append(iter.next().toString()).append("\n");
         }
         return total.toString();
     }
+
 }

@@ -5,8 +5,8 @@
  */
 package com.shelby.blackjack.logic.cards;
 
-import com.shelby.blackjack.logic.cards.util.Ranks;
-import com.shelby.blackjack.logic.cards.util.Suits;
+import com.shellucas.casinoapi.cards.Ranks;
+import com.shellucas.casinoapi.cards.Suits;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
  *
  * @author shelby
  */
-public class CardTest {
+public class DefaultCardTest {
     
-    public CardTest() {
+    public DefaultCardTest() {
     }
     
     @BeforeClass
@@ -40,12 +40,12 @@ public class CardTest {
     }
 
     /**
-     * Test of softValue method, of class Card.
+     * Test of softValue method, of class DefaultCard.
      */
     @Test
     public void testSoftValue() {
         System.out.println("softValue");
-        Card instance = null;
+        DefaultCard instance = null;
         int expResult = 0;
         int result = instance.softValue();
         assertEquals(expResult, result);
@@ -54,12 +54,12 @@ public class CardTest {
     }
 
     /**
-     * Test of hardValue method, of class Card.
+     * Test of hardValue method, of class DefaultCard.
      */
     @Test
     public void testHardValue() {
         System.out.println("hardValue");
-        Card instance = null;
+        DefaultCard instance = null;
         int expResult = 0;
         int result = instance.hardValue();
         assertEquals(expResult, result);
@@ -68,12 +68,12 @@ public class CardTest {
     }
 
     /**
-     * Test of getRANK method, of class Card.
+     * Test of getRANK method, of class DefaultCard.
      */
     @Test
     public void testGetRANK() {
         System.out.println("getRANK");
-        Card instance = null;
+        DefaultCard instance = null;
         Ranks expResult = null;
         Ranks result = instance.getRANK();
         assertEquals(expResult, result);
@@ -82,12 +82,12 @@ public class CardTest {
     }
 
     /**
-     * Test of getSUIT method, of class Card.
+     * Test of getSUIT method, of class DefaultCard.
      */
     @Test
     public void testGetSUIT() {
         System.out.println("getSUIT");
-        Card instance = null;
+        DefaultCard instance = null;
         Suits expResult = null;
         Suits result = instance.getSUIT();
         assertEquals(expResult, result);
@@ -96,12 +96,12 @@ public class CardTest {
     }
 
     /**
-     * Test of hashCode method, of class Card.
+     * Test of hashCode method, of class DefaultCard.
      */
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        Card instance = null;
+        DefaultCard instance = null;
         int expResult = 0;
         int result = instance.hashCode();
         assertEquals(expResult, result);
@@ -110,13 +110,13 @@ public class CardTest {
     }
 
     /**
-     * Test of equals method, of class Card.
+     * Test of equals method, of class DefaultCard.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
         Object obj = null;
-        Card instance = null;
+        DefaultCard instance = null;
         boolean expResult = false;
         boolean result = instance.equals(obj);
         assertEquals(expResult, result);

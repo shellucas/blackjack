@@ -1,20 +1,23 @@
 package com.shelby.blackjack.logic.cards;
 
 import com.shelby.blackjack.logic.cards.hands.Hand;
-import com.shelby.blackjack.logic.cards.util.Ranks;
-import com.shelby.blackjack.logic.cards.util.Suits;
+
+import com.shellucas.casinoapi.cards.Card;
+import com.shellucas.casinoapi.cards.Ranks;
+import com.shellucas.casinoapi.cards.Suits;
+
 import java.util.Objects;
 
 /**
  *
  * @author shelby
  */
-public class Card {
+public class DefaultCard implements Card {
     
     private final Ranks RANK;
     private final Suits SUIT;
 
-    public Card(Suits SUIT, Ranks RANK) {
+    public DefaultCard(Suits SUIT, Ranks RANK) {
         this.SUIT = SUIT;
         this.RANK = RANK;
     }
@@ -41,12 +44,19 @@ public class Card {
         return this.RANK.getRank();
     }
 
+    @Override
     public Ranks getRANK() {
         return this.RANK;
     }
     
+    @Override
     public Suits getSUIT() {
         return this.SUIT;
+    }
+
+    @Override
+    public int getValue() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -68,7 +78,7 @@ public class Card {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Card other = (Card) obj;
+        final DefaultCard other = (DefaultCard) obj;
         return this.RANK == other.RANK && this.SUIT == other.SUIT;
     }
 
@@ -76,4 +86,5 @@ public class Card {
     public String toString() {
         return this.RANK + " of " + this.SUIT;
     }
+
 }

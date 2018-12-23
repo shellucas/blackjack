@@ -5,7 +5,7 @@
  */
 package com.shelby.blackjack.logic.cards.hands;
 
-import com.shelby.blackjack.logic.cards.Card;
+import com.shelby.blackjack.logic.cards.DefaultCard;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,7 +44,7 @@ public class HandSoftTotalTest {
     @Test
     public void testTotal() {
         System.out.println("total");
-        Card cardToOmit = null;
+        DefaultCard cardToOmit = null;
         HandSoftTotal instance = null;
         int expResult = 0;
         int result = instance.total(cardToOmit);

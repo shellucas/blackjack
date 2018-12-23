@@ -1,6 +1,6 @@
 package com.shelby.blackjack.logic.cards.hands;
 
-import com.shelby.blackjack.logic.cards.Card;
+import com.shelby.blackjack.logic.cards.DefaultCard;
 
 /**
  *
@@ -13,9 +13,10 @@ public class HandHardTotal extends HandTotal {
     }
 
     @Override
-    public int total(Card cardToOmit) {
+    public int total(DefaultCard cardToOmit) {
         return super.getHand().getCards()
                 .stream()
+                .map(c -> (DefaultCard) c)
                 .filter((card) -> card != cardToOmit)
                 .mapToInt((card) -> card.hardValue())
                 .sum();

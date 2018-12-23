@@ -1,6 +1,6 @@
 package com.shelby.blackjack.logic.users;
 
-import com.shelby.blackjack.logic.cards.Card;
+import com.shelby.blackjack.logic.cards.DefaultCard;
 import com.shelby.blackjack.logic.cards.Deck;
 import com.shelby.blackjack.logic.cards.hands.Hand;
 
@@ -16,8 +16,8 @@ public class House implements User {
     }
 
     @Override
-    public Card hit(int i, Deck deck) {
-        Card drawn = deck.draw();
+    public DefaultCard hit(int i, Deck deck) {
+        DefaultCard drawn = deck.draw();
 //        this.hand.addCard(drawn);
         return drawn;
     }

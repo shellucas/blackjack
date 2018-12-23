@@ -1,4 +1,4 @@
-package com.shelby.blackjack.game.util;
+package com.shelby.blackjack.table;
 
 /**
  *

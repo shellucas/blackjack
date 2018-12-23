@@ -1,6 +1,6 @@
 package com.shelby.blackjack.logic.cards.hands;
 
-import com.shelby.blackjack.logic.cards.Card;
+import com.shelby.blackjack.logic.cards.DefaultCard;
 
 /**
  *
@@ -25,6 +25,6 @@ public abstract class HandTotal {
      * @param cardToOmit
      * @return
      */
-    public abstract int total(Card cardToOmit);
+    public abstract int total(DefaultCard cardToOmit);
 
 }

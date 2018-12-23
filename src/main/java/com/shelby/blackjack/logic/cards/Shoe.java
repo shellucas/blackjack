@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Shoe {
 
-    private final Deque<Card> shoe;
+    private final Deque<DefaultCard> shoe;
 
     /**
      * Shoe contains N amount of decks where 0 < N < 9.
@@ -44,7 +44,7 @@ public class Shoe {
      *
      * @return drawn card
      */
-    public Card deal() {
+    public DefaultCard deal() {
         return shoe.getLast();
     }
 
@@ -53,7 +53,7 @@ public class Shoe {
      *
      * @param card
      */
-    public void returnCard(Card card) {
+    public void returnCard(DefaultCard card) {
         shoe.addFirst(card);
     }
 

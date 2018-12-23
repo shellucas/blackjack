@@ -1,6 +1,6 @@
 package com.shelby.blackjack.logic.users;
 
-import com.shelby.blackjack.logic.cards.Card;
+import com.shelby.blackjack.logic.cards.DefaultCard;
 import com.shelby.blackjack.logic.cards.Deck;
 import com.shelby.blackjack.logic.cards.hands.Hand;
 import java.util.ArrayList;
@@ -42,8 +42,8 @@ public class Player implements User {
      * @return drawn card.
      */
     @Override
-    public Card hit(int i, Deck deck) {
-        Card card = deck.draw();
+    public DefaultCard hit(int i, Deck deck) {
+        DefaultCard card = deck.draw();
         hands.get(i).addAndRecalculate(card);
         return card;
     }

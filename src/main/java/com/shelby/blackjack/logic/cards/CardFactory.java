@@ -1,7 +1,7 @@
 package com.shelby.blackjack.logic.cards;
 
-import com.shelby.blackjack.logic.cards.util.Ranks;
-import com.shelby.blackjack.logic.cards.util.Suits;
+import com.shellucas.casinoapi.cards.Ranks;
+import com.shellucas.casinoapi.cards.Suits;
 
 /**
  *
@@ -16,7 +16,7 @@ public interface CardFactory {
      * @param suit
      * @return 
      */
-    public static Card getCard(Ranks rank, Suits suit) {
+    public static DefaultCard getCard(Ranks rank, Suits suit) {
         switch (rank) {
             case ACE:
                 return new AceCard(suit, rank);
@@ -25,7 +25,7 @@ public interface CardFactory {
             case KING:
                 return new FaceCard(suit, rank);
             default:
-                return new Card(suit, rank);
+                return new DefaultCard(suit, rank);
         }
     }
 

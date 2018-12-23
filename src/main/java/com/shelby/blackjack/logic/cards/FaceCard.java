@@ -1,13 +1,13 @@
 package com.shelby.blackjack.logic.cards;
 
-import com.shelby.blackjack.logic.cards.util.Ranks;
-import com.shelby.blackjack.logic.cards.util.Suits;
+import com.shellucas.casinoapi.cards.Ranks;
+import com.shellucas.casinoapi.cards.Suits;
 
 /**
  *
  * @author shelby
  */
-public class FaceCard extends Card {
+public class FaceCard extends DefaultCard {
 
     public FaceCard(Suits SUIT, Ranks RANK) {
         super(SUIT, RANK);

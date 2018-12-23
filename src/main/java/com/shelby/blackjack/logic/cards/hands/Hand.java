@@ -1,6 +1,9 @@
 package com.shelby.blackjack.logic.cards.hands;
 
-import com.shelby.blackjack.logic.cards.Card;
+import com.shelby.blackjack.logic.cards.DefaultCard;
+import com.shelby.blackjack.table.Bet;
+import com.shellucas.casinoapi.cards.Card;
+import com.shellucas.casinoapi.cards.CardCollection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,27 +11,30 @@ import java.util.List;
  *
  * @author shelby
  */
-public class Hand {
+public class Hand implements CardCollection {
 
     private final List<Card> cards;
     public HandHardTotal hard;
     public HandSoftTotal soft;
     private HandTotal altTotal;
+    private Bet ante;
 
-    public Hand() {
+    public Hand(Bet ante) {
         this.cards = new ArrayList<>();
         hard = new HandHardTotal(this);
         soft = new HandSoftTotal(this);
         altTotal = hard;
+        this.ante = ante;
     }
 
     /**
      * Adds the passed card to the hand.
      *
+     * @param ante
      * @param card
      */
-    public Hand(Card card) {
-        this();
+    public Hand(Bet ante, DefaultCard card) {
+        this(ante);
         this.addAndRecalculate(card);
     }
 
@@ -46,7 +52,7 @@ public class Hand {
      *
      * @param cardToAdd
      */
-    public final void addAndRecalculate(Card cardToAdd) {
+    public final void addAndRecalculate(DefaultCard cardToAdd) {
         this.cards.add(cardToAdd);
         cardToAdd.setAltTotal(this);
     }
@@ -65,6 +71,7 @@ public class Hand {
      * 
      * @return 
      */
+    @Override
     public int size() {
         return this.cards.size();
     }
@@ -92,10 +99,19 @@ public class Hand {
      * 
      * @return 
      */
+    @Override
     public List<Card> getCards() {
         return this.cards;
     }
 
+    public Bet getAnte() {
+        return ante;
+    }
+
+    public void setAnte(Bet ante) {
+        this.ante = ante;
+    }
+    
     /**
      * Returns a string containing every card in the hand on a new line.
      * 

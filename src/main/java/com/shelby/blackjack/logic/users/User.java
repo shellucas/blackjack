@@ -5,7 +5,7 @@
  */
 package com.shelby.blackjack.logic.users;
 
-import com.shelby.blackjack.logic.cards.Card;
+import com.shelby.blackjack.logic.cards.DefaultCard;
 import com.shelby.blackjack.logic.cards.Deck;
 
 /**
@@ -20,7 +20,7 @@ public interface User {
      * @param deck
      * @return drawn card.
      */
-    Card hit(int hand, Deck deck);
+    DefaultCard hit(int hand, Deck deck);
     
     /**
      * Reset hand to a fresh new hand

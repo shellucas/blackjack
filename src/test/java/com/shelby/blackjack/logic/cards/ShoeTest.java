@@ -57,8 +57,8 @@ public class ShoeTest {
     public void testDeal() {
         System.out.println("deal");
         Shoe instance = null;
-        Card expResult = null;
-        Card result = instance.deal();
+        DefaultCard expResult = null;
+        DefaultCard result = instance.deal();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -70,7 +70,7 @@ public class ShoeTest {
     @Test
     public void testReturnCard() {
         System.out.println("returnCard");
-        Card card = null;
+        DefaultCard card = null;
         Shoe instance = null;
         instance.returnCard(card);
         // TODO review the generated test code and remove the default call to fail.

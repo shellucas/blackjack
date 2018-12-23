@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
  * @author shelby
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({com.shelby.blackjack.logic.cards.hands.HandHardTotalTest.class, com.shelby.blackjack.logic.cards.hands.HandSoftTotalTest.class, com.shelby.blackjack.logic.cards.hands.HandTotalTest.class, com.shelby.blackjack.logic.cards.hands.HandTest.class})
+@Suite.SuiteClasses({com.shelby.blackjack.logic.cards.hands.HandHardTotalTest.class, com.shelby.blackjack.logic.cards.hands.HandSoftTotalTest.class, com.shelby.blackjack.logic.cards.hands.HandTotalTest.class})
 public class HandsSuite {
 
     @BeforeClass

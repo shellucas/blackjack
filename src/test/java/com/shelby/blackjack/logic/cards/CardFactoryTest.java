@@ -5,8 +5,8 @@
  */
 package com.shelby.blackjack.logic.cards;
 
-import com.shelby.blackjack.logic.cards.util.Ranks;
-import com.shelby.blackjack.logic.cards.util.Suits;
+import com.shellucas.casinoapi.cards.Ranks;
+import com.shellucas.casinoapi.cards.Suits;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -47,8 +47,8 @@ public class CardFactoryTest {
         System.out.println("getCard");
         Ranks rank = Ranks.EIGHT;
         Suits suit = Suits.HEARTS;
-        Card expResult = new Card(suit, rank);
-        Card result = CardFactory.getCard(rank, suit);
+        DefaultCard expResult = new DefaultCard(suit, rank);
+        DefaultCard result = CardFactory.getCard(rank, suit);
         assertEquals(expResult, result);
         
         // Test AceCard

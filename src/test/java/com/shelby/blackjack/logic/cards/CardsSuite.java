@@ -18,9 +18,8 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({com.shelby.blackjack.logic.cards.ShoeTest.class
-        , com.shelby.blackjack.logic.cards.util.UtilSuite.class
         , com.shelby.blackjack.logic.cards.CardFactoryTest.class
-        , com.shelby.blackjack.logic.cards.CardTest.class
+        , com.shelby.blackjack.logic.cards.DefaultCardTest.class
         , com.shelby.blackjack.logic.cards.DeckTest.class})
 public class CardsSuite {
 

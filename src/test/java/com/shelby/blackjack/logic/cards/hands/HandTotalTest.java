@@ -5,10 +5,11 @@
  */
 package com.shelby.blackjack.logic.cards.hands;
 
-import com.shelby.blackjack.logic.cards.Card;
+import com.shelby.blackjack.logic.cards.DefaultCard;
 import com.shelby.blackjack.logic.cards.CardFactory;
-import com.shelby.blackjack.logic.cards.util.Ranks;
-import com.shelby.blackjack.logic.cards.util.Suits;
+import com.shelby.blackjack.table.Bet;
+import com.shellucas.casinoapi.cards.Ranks;
+import com.shellucas.casinoapi.cards.Suits;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,7 +45,8 @@ public class HandTotalTest {
     @Test
     public void testHandtotal() {
         System.out.println("Black box");
-        Hand hand = new Hand();
+        Bet bet = new Bet(10);
+        Hand hand = new Hand(bet);
 //        HandTotal hard = new HandHardTotal(hand);
         int exp = 0;
         int result = hand.value();
@@ -56,9 +58,9 @@ public class HandTotalTest {
         result = hand.value();
         assertEquals(exp, result);
         
-        Card aceClubs = CardFactory.getCard(Ranks.ACE, Suits.CLUBS);
-        Card kingDiamonds = CardFactory.getCard(Ranks.KING, Suits.DIAMONDS);
-        hand = new Hand(aceClubs);
+        DefaultCard aceClubs = CardFactory.getCard(Ranks.ACE, Suits.CLUBS);
+        DefaultCard kingDiamonds = CardFactory.getCard(Ranks.KING, Suits.DIAMONDS);
+        hand = new Hand(bet, aceClubs);
         hand.addAndRecalculate(kingDiamonds);
         
         assertTrue(hand.getCards()
@@ -69,11 +71,11 @@ public class HandTotalTest {
         result = hand.value();
         assertEquals(exp, result);
         
-        hand = new Hand();
-        Card threeDiamonds = CardFactory.getCard(Ranks.THREE, Suits.DIAMONDS);
-        Card kingClubs = CardFactory.getCard(Ranks.KING, Suits.CLUBS);
-        Card AceDiamonds = CardFactory.getCard(Ranks.ACE, Suits.DIAMONDS);
-        Card AceHearts = CardFactory.getCard(Ranks.ACE, Suits.HEARTS);
+        hand = new Hand(bet);
+        DefaultCard threeDiamonds = CardFactory.getCard(Ranks.THREE, Suits.DIAMONDS);
+        DefaultCard kingClubs = CardFactory.getCard(Ranks.KING, Suits.CLUBS);
+        DefaultCard AceDiamonds = CardFactory.getCard(Ranks.ACE, Suits.DIAMONDS);
+        DefaultCard AceHearts = CardFactory.getCard(Ranks.ACE, Suits.HEARTS);
         
         hand.addAndRecalculate(threeDiamonds);
         hand.addAndRecalculate(kingClubs);
@@ -100,7 +102,7 @@ public class HandTotalTest {
             super(null);
         }
 
-        public int total(Card cardToOmit) {
+        public int total(DefaultCard cardToOmit) {
             return 0;
         }
     }

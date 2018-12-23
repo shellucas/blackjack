@@ -5,8 +5,8 @@
  */
 package com.shelby.blackjack.logic.cards;
 
-import com.shelby.blackjack.logic.cards.util.Ranks;
-import com.shelby.blackjack.logic.cards.util.Suits;
+import com.shellucas.casinoapi.cards.Ranks;
+import com.shellucas.casinoapi.cards.Suits;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,6 +14,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+
 
 /**
  *
@@ -46,7 +48,7 @@ public class DeckTest {
     @Test
     public void testDeck() {
         Deck instance = new  Deck();
-        List<Card> result = instance.getAllCards();
+        List<DefaultCard> result = instance.getAllCards();
         assertTrue(result.size() == 52);
         System.out.println(instance.toString());
     }
@@ -58,8 +60,8 @@ public class DeckTest {
     public void testDraw() {
         System.out.println("draw");
         Deck instance = new Deck();
-        Card expResult = CardFactory.getCard(Ranks.ACE, Suits.SPADES);
-        Card result = instance.draw();
+        DefaultCard expResult = CardFactory.getCard(Ranks.ACE, Suits.SPADES);
+        DefaultCard result = instance.draw();
         assertEquals(expResult, result);
         assertTrue(!instance.getAllCards().contains(expResult));
         
@@ -78,7 +80,7 @@ public class DeckTest {
     @Test
     public void testReturnCard() {
         System.out.println("returnCard");
-        Card card = new Card(Suits.SPADES, Ranks.ACE);
+        DefaultCard card = new DefaultCard(Suits.SPADES, Ranks.ACE);
         Deck instance = new Deck();
         instance.draw();
         
