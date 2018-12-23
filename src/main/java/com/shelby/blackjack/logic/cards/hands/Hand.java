@@ -21,7 +21,7 @@ public class Hand {
         soft = new HandSoftTotal(this);
         altTotal = hard;
     }
-
+//
     /**
      * Adds the passed card to the hand.
      *
