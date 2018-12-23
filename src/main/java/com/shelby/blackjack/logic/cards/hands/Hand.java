@@ -4,6 +4,7 @@ import com.shelby.blackjack.logic.cards.DefaultCard;
 import com.shellucas.casinoapi.bets.Bet;
 import com.shellucas.casinoapi.cards.Card;
 import com.shellucas.casinoapi.cards.CardCollection;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,16 +68,6 @@ public class Hand implements CardCollection {
     }
 
     /**
-     * Amount of cards in the hand.
-     * 
-     * @return 
-     */
-    @Override
-    public int size() {
-        return this.cards.size();
-    }
-
-    /**
      * Checks if there are exactly 2 cards in hand and if the sum is 21.
      * 
      * @return 
@@ -93,6 +84,24 @@ public class Hand implements CardCollection {
     public boolean busted() {
         return this.value() > 21;
     }
+
+    public Bet getAnte() {
+        return ante;
+    }
+
+    public void setAnte(Bet ante) {
+        this.ante = ante;
+    }
+
+    /**
+     * Amount of cards in the hand.
+     * 
+     * @return 
+     */
+    @Override
+    public int size() {
+        return this.cards.size();
+    }
     
     /**
      * Returns all cards in the hand as a list.
@@ -102,14 +111,6 @@ public class Hand implements CardCollection {
     @Override
     public List<Card> getCards() {
         return this.cards;
-    }
-
-    public Bet getAnte() {
-        return ante;
-    }
-
-    public void setAnte(Bet ante) {
-        this.ante = ante;
     }
     
     /**
