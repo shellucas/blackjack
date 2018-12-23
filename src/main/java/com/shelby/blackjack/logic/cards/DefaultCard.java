@@ -35,6 +35,10 @@ public class DefaultCard implements Card {
             hand.setAltTotal(hand.hard);
         }
     }
+    
+    public boolean offerInsurance() {
+        return false;
+    }
 
     public int softValue() {
         return this.RANK.getRank();

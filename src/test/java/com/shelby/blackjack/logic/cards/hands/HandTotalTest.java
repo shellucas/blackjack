@@ -7,9 +7,10 @@ package com.shelby.blackjack.logic.cards.hands;
 
 import com.shelby.blackjack.logic.cards.DefaultCard;
 import com.shelby.blackjack.logic.cards.CardFactory;
+import com.shelby.blackjack.logic.users.BlackjackPlayer;
+import com.shelby.blackjack.table.BlackjackTable;
 import com.shellucas.casinoapi.bets.Bet;
-import com.shellucas.casinoapi.bets.factories.AbstractCardFactory;
-import com.shellucas.casinoapi.cards.Card;
+import com.shellucas.casinoapi.bets.tables.BetPlacer;
 import com.shellucas.casinoapi.cards.Ranks;
 import com.shellucas.casinoapi.cards.Suits;
 import org.junit.After;
@@ -48,9 +49,12 @@ public class HandTotalTest {
     public void testHandtotal() {
         System.out.println("Black box");
         CardFactory f = new CardFactory();
-
+        BetPlacer table = new BlackjackTable();
+        
+        BlackjackPlayer player = new BlackjackPlayer(100, 10, table);
+        
         Bet bet = new Bet(10);
-        Hand hand = new Hand(bet);
+        Hand hand = new Hand(player, bet);
 //        HandTotal hard = new HandHardTotal(hand);
         int exp = 0;
         int result = hand.value();
@@ -64,7 +68,7 @@ public class HandTotalTest {
 
         DefaultCard aceClubs = f.getCard(Ranks.ACE, Suits.CLUBS);
         DefaultCard kingDiamonds = f.getCard(Ranks.KING, Suits.DIAMONDS);
-        hand = new Hand(bet, aceClubs);
+        hand = new Hand(player, bet, aceClubs);
         hand.addAndRecalculate(kingDiamonds);
 
         assertTrue(hand.getCards().get(0).getRANK() == Ranks.ACE);
@@ -74,7 +78,7 @@ public class HandTotalTest {
         result = hand.value();
         assertEquals(exp, result);
 
-        hand = new Hand(bet);
+        hand = new Hand(player, bet);
         DefaultCard threeDiamonds = f.getCard(Ranks.THREE, Suits.DIAMONDS);
         DefaultCard kingClubs = f.getCard(Ranks.KING, Suits.CLUBS);
         DefaultCard AceDiamonds = f.getCard(Ranks.ACE, Suits.DIAMONDS);

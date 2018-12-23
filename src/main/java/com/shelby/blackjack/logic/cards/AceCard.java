@@ -23,6 +23,11 @@ public class AceCard extends DefaultCard {
             hand.setAltTotal(hand.soft);
         }
     }
+    
+    @Override
+    public boolean offerInsurance() {
+        return true;
+    }
 
     @Override
     public int softValue() {

@@ -35,7 +35,7 @@ public class BlackjackTable implements BetPlacer {
     }
     
     public void placeBet(Bet bet, Hand hand) {
-        
+        hand.setBet(bet);
         this.bets.add(bet);
     }
 

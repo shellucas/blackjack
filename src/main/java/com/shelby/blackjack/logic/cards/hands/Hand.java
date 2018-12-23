@@ -4,6 +4,7 @@ import com.shelby.blackjack.logic.cards.DefaultCard;
 import com.shellucas.casinoapi.bets.Bet;
 import com.shellucas.casinoapi.cards.Card;
 import com.shellucas.casinoapi.cards.CardCollection;
+import com.shellucas.casinoapi.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,23 +20,28 @@ public class Hand implements CardCollection {
     public HandSoftTotal soft;
     private HandTotal altTotal;
     private Bet ante;
+    private Player owner;
+    private boolean splitDeclined;
 
-    public Hand(Bet ante) {
+    public Hand(Player owner, Bet ante) {
         this.cards = new ArrayList<>();
         hard = new HandHardTotal(this);
         soft = new HandSoftTotal(this);
         altTotal = hard;
         this.ante = ante;
+        this.owner = owner;
+        this.splitDeclined = false;
     }
 
     /**
      * Adds the passed card to the hand.
      *
+     * @param owner
      * @param ante
      * @param card
      */
-    public Hand(Bet ante, DefaultCard card) {
-        this(ante);
+    public Hand(Player owner, Bet ante, DefaultCard card) {
+        this(owner, ante);
         this.addAndRecalculate(card);
     }
 
@@ -84,12 +90,32 @@ public class Hand implements CardCollection {
     public boolean busted() {
         return this.value() > 21;
     }
+    
+    public Card removeLastCard() {
+        return this.getCards().remove(this.getCards().size() - 1);
+    }
+    
+    public void setSplitDeclined() {
+        this.splitDeclined = true;
+    }
+    
+    public boolean splittable() {
+        if (cards.size() != 2) { 
+            setSplitDeclined();
+            return false;
+        } 
+        return cards.get(0).getRANK() == cards.get(1).getRANK();
+    }
+    
+    public Card getUpCard() {
+        return this.cards.get(0);
+    }
 
-    public Bet getAnte() {
+    public Bet getBet() {
         return ante;
     }
 
-    public void setAnte(Bet ante) {
+    public void setBet(Bet ante) {
         this.ante = ante;
     }
 
