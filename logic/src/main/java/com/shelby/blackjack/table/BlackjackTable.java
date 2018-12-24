@@ -2,15 +2,15 @@ package com.shelby.blackjack.table;
 
 import com.shelby.blackjack.logic.cards.hands.Hand;
 import com.shellucas.casinoapi.bets.Bet;
-import com.shellucas.casinoapi.bets.tables.BetPlacer;
 import java.util.ArrayList;
 import java.util.List;
+import com.shellucas.casinoapi.bets.tables.BetPlacable;
 
 /**
  *
  * @author shelby
  */
-public class BlackjackTable implements BetPlacer {
+public class BlackjackTable implements BetPlacable {
     
     /**
      * Limit for sum of a player's bets.

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Hand implements CardCollection {
 
-    private final List<Card> cards;
+    private List<Card> cards;
     public HandHardTotal hard;
     public HandSoftTotal soft;
     private HandTotal altTotal;
@@ -43,15 +43,6 @@ public class Hand implements CardCollection {
     public Hand(Player owner, Bet ante, DefaultCard card) {
         this(owner, ante);
         this.addAndRecalculate(card);
-    }
-
-    /**
-     * Sets the alt total to the passed hand total.
-     *
-     * @param handTotal
-     */
-    public void setAltTotal(HandTotal handTotal) {
-        this.altTotal = handTotal;
     }
 
     /**
@@ -91,14 +82,28 @@ public class Hand implements CardCollection {
         return this.value() > 21;
     }
     
+    /**
+     * Removes and returns the last card in this hand.
+     * 
+     * @return 
+     */
     public Card removeLastCard() {
         return this.getCards().remove(this.getCards().size() - 1);
     }
     
-    public void setSplitDeclined() {
-        this.splitDeclined = true;
+    /**
+     * Removes all cards from the hand
+     */
+    public void clear() {
+        this.cards = new ArrayList<>();
     }
     
+    /**
+     * Returns true if the hand is able to split. That is it consists of exactly
+     * 2 cards, which are equal to each other in ranking.
+     * 
+     * @return 
+     */
     public boolean splittable() {
         if (cards.size() != 2) { 
             setSplitDeclined();
@@ -107,8 +112,29 @@ public class Hand implements CardCollection {
         return cards.get(0).getRANK() == cards.get(1).getRANK();
     }
     
-    public Card getUpCard() {
-        return this.cards.get(0);
+    public void setSplitDeclined() {
+        this.splitDeclined = true;
+    }
+    
+    public void split() {
+        
+    }
+
+    /**
+     * Sets the alt total to the passed hand total.
+     *
+     * @param handTotal
+     */
+    public void setAltTotal(HandTotal handTotal) {
+        this.altTotal = handTotal;
+    }
+
+    public boolean isSplitDeclined() {
+        return splitDeclined;
+    }
+    
+    public DefaultCard getUpCard() {
+        return (DefaultCard) this.cards.get(0);
     }
 
     public Bet getBet() {

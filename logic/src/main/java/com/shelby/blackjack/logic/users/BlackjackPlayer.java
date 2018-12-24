@@ -2,58 +2,72 @@ package com.shelby.blackjack.logic.users;
 
 import com.shelby.blackjack.logic.cards.DefaultCard;
 import com.shelby.blackjack.logic.cards.hands.Hand;
+
 import com.shellucas.casinoapi.bets.Bet;
-import com.shellucas.casinoapi.bets.tables.BetPlacer;
 import com.shellucas.casinoapi.cards.Card;
 import com.shellucas.casinoapi.players.Player;
+
 import java.util.ArrayList;
 import java.util.List;
+import com.shellucas.casinoapi.bets.tables.BetPlacable;
 
 /**
  *
  * @author shelby
  */
-public class BlackjackPlayer extends Player{
+public class BlackjackPlayer implements Player {
 
+    private double stake;
+    private BetPlacable table;
     private List<Hand> hands;
-    
-    public BlackjackPlayer(double stake, int roundsToGo, BetPlacer table) {
-        super(stake, roundsToGo, table);
-        hands = new ArrayList<>();
+
+    public BlackjackPlayer(double stake, BetPlacable table) {
+        this.stake = stake;
+        this.table = table;
+        this.hands = new ArrayList<>();
     }
-    
+
+    /**
+     * Resets the hands of the player
+     */
     public void newGame() {
         hands = new ArrayList<>();
     }
     
+    /**
+     * Returns the first hand of the player (most often used unless split).
+     * 
+     * @return 
+     */
     public Hand getFirstHand() {
         return hands.get(0);
     }
 
-    public List<Hand> getHands() {
-        return hands;
-    }
-    
     public boolean evenMoney(Hand hand) {
         return false;
     }
-    
+
     public boolean insurance(Hand hand) {
         return false;
     }
-    
-    public Hand split(Hand hand, Bet bet) {
+
+    public Hand split(Hand hand) {
         Card removed = hand.removeLastCard();
-        Hand splitHand = new Hand(this, bet, (DefaultCard) removed);
+        Hand splitHand = new Hand(this, hand.getBet(), (DefaultCard) removed);
+        hands.add(splitHand);
         return splitHand;
     }
-    
+
     public boolean doubleDown(Hand hand) {
         return false;
     }
-    
+
     public boolean hit(Hand hand) {
         return hand.value() < 17;
+    }
+    
+    public boolean standPat() {
+        return true;
     }
 
     @Override
@@ -64,30 +78,50 @@ public class BlackjackPlayer extends Player{
     @Override
     public void placeBets(Bet bet) {
         hands.add(new Hand(this, bet));
-        super.getTable().placeBet(bet);
+        getTable().placeBet(bet);
     }
 
     @Override
     public void win(Bet wonBet) {
-        super.setStake(super.getStake() + wonBet.getAmount());
+        setStake(getStake() + wonBet.getAmount());
     }
 
     @Override
     public void lose(Bet lostBet) {
-        super.setStake(super.getStake() - lostBet.getAmount());
+        setStake(getStake() - lostBet.getAmount());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb = (isPlaying()) 
+        sb = (isPlaying())
                 ? sb.append("Player is active") : sb.append("Player is not active.");
         sb.append("Player's stake: ")
-                .append(super.getStake())
+                .append(getStake())
                 .append("\n");
         sb.append("Current hands: ").append("\n");
         for (Hand hand : hands) { sb.append(hand).append("\n"); }
         return sb.toString();
+    }
+
+    public double getStake() {
+        return stake;
+    }
+
+    public BetPlacable getTable() {
+        return table;
+    }
+
+    public void setStake(double stake) {
+        this.stake = stake;
+    }
+
+    public void setTable(BetPlacable table) {
+        this.table = table;
+    }
+    
+    public List<Hand> getHands() {
+        return hands;
     }
 
 }

@@ -5,12 +5,13 @@
  */
 package com.shelby.blackjack.logic.cards.hands;
 
+import com.shelby.blackjack.logic.betting.BlackjackOutcome;
+import com.shelby.blackjack.logic.betting.PlayerBet;
 import com.shelby.blackjack.logic.cards.DefaultCard;
 import com.shelby.blackjack.logic.cards.CardFactory;
 import com.shelby.blackjack.logic.users.BlackjackPlayer;
 import com.shelby.blackjack.table.BlackjackTable;
 import com.shellucas.casinoapi.bets.Bet;
-import com.shellucas.casinoapi.bets.tables.BetPlacer;
 import com.shellucas.casinoapi.cards.Ranks;
 import com.shellucas.casinoapi.cards.Suits;
 import org.junit.After;
@@ -19,6 +20,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import com.shellucas.casinoapi.bets.tables.BetPlacable;
 
 /**
  *
@@ -49,11 +51,11 @@ public class HandTotalTest {
     public void testHandtotal() {
         System.out.println("Black box");
         CardFactory f = new CardFactory();
-        BetPlacer table = new BlackjackTable();
+        BetPlacable table = new BlackjackTable();
         
-        BlackjackPlayer player = new BlackjackPlayer(100, 10, table);
+        BlackjackPlayer player = new BlackjackPlayer(100, table);
         
-        Bet bet = new Bet(10);
+        Bet bet = new PlayerBet(10, new BlackjackOutcome("RED", 10), player);
         Hand hand = new Hand(player, bet);
 //        HandTotal hard = new HandHardTotal(hand);
         int exp = 0;

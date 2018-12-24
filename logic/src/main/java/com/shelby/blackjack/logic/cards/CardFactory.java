@@ -31,4 +31,9 @@ public class CardFactory implements AbstractCardFactory {
         }
     }
 
+    @Override
+    public Deck getCardCollection() {
+        return new Deck();
+    }
+
 }

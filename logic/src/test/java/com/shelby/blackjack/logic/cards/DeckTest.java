@@ -52,7 +52,7 @@ public class DeckTest {
     @Test
     public void testDeck() {
         Deck instance = new  Deck();
-        List<Card> result = instance.getAllCards();
+        List<DefaultCard> result = instance.getAllCards();
         assertTrue(result.size() == 52);
         System.out.println(instance.toString());
     }
