@@ -59,5 +59,10 @@ public class BlackjackOutcome implements Outcome {
     public double winAmount(double betAmount) {
         return betAmount * this.odds;
     }
+
+    @Override
+    public int compareTo(Outcome o) {
+        throw new UnsupportedOperationException();
+    }
     
 }

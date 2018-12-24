@@ -5,7 +5,7 @@ import com.shelby.blackjack.logic.cards.Shoe;
 import com.shelby.blackjack.logic.cards.hands.Hand;
 import com.shelby.blackjack.logic.users.BlackjackPlayer;
 import com.shelby.blackjack.table.BlackjackTable;
-import com.shellucas.casinoapi.players.Player;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +21,7 @@ public class BlackJackGame {
     private Shoe shoe;
     private Hand dealer;
     private List<BlackjackPlayer> players;
+    private boolean dealerIsBust;
 
     /**
      * Default game with a maximum accumulation of bets of 10000 and a minimum
@@ -34,6 +35,7 @@ public class BlackJackGame {
         this.players = new ArrayList<>();
         this.table = new BlackjackTable(1000, 10);
         this.dealer = dealer;
+        this.dealerIsBust = false;
     }
 
     public BlackJackGame(Shoe shoe, Hand dealer, BlackjackTable table) {
@@ -57,13 +59,15 @@ public class BlackJackGame {
         return players.add(player);
     }
 
-    public void start() {
+    public void cycle() {
         dealPlayers();
         dealToDealer();
         getInsurances();
         getSplits();
         fillHands();
         // TODO 7 Resolve ante bets if dealer busts
+        
+        
         // TODO 8 Resolve compare bets
     }
 
@@ -91,15 +95,15 @@ public class BlackJackGame {
      * @param handToDeal
      */
     private void dealTo(Hand handToDeal) {
-        handToDeal.addAndRecalculate(shoe.deal());
-        handToDeal.addAndRecalculate(shoe.deal());
+        handToDeal.addAndRecalculateHand(shoe.deal());
+        handToDeal.addAndRecalculateHand(shoe.deal());
     }
 
     /**
      * Offer insurance for each hand of each player if the upcard is an ace.
      */
     private void getInsurances() {
-        DefaultCard upCard = dealer.getUpCard();
+        DefaultCard upCard = (DefaultCard) dealer.getUpCard();
         if (upCard.offerInsurance()) {
             getAllHands().forEach((player, hands) -> {
                 hands.forEach((hand) -> {
@@ -117,8 +121,8 @@ public class BlackJackGame {
             hands.forEach((hand) -> {
                 if (hand.splittable() && !hand.isSplitDeclined()) {
                     Hand splitHand = player.split(hand);
-                    hand.addAndRecalculate(shoe.deal());
-                    splitHand.addAndRecalculate(shoe.deal());
+                    hand.addAndRecalculateHand(shoe.deal());
+                    splitHand.addAndRecalculateHand(shoe.deal());
                 }
             });
         });
@@ -144,7 +148,7 @@ public class BlackJackGame {
     private void offerChoices(BlackjackPlayer player, Hand hand) {
         while (true) {
             if (hand.busted()) { break; }
-            if (player.hit(hand)) { hand.addAndRecalculate(shoe.deal()); } 
+            if (player.hit(hand)) { hand.addAndRecalculateHand(shoe.deal()); } 
             else if (player.standPat()) { break; }
         }
     }
@@ -155,13 +159,24 @@ public class BlackJackGame {
     private void fillDealer() {
         while (true) {
             if (dealer.busted()) {
+                this.dealerIsBust = true;
                 break;
             } else if (dealer.value() < 17) {
-                dealer.addAndRecalculate(shoe.deal());
+                dealer.addAndRecalculateHand(shoe.deal());
             } else {
                 break;
             }
         }
+    }
+    
+    private void resolveBust() {
+        getAllHands().forEach((player, hands) -> {
+            for (Hand hand : hands) {
+                if (!hand.busted() && ) {
+                    
+                }
+            }
+        });
     }
 
     /**

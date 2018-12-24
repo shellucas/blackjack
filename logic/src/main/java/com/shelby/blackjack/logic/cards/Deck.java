@@ -31,36 +31,33 @@ public class Deck implements CardCollection {
             }
         }
     }
-    
+
     /**
      * Shuffles the deck
      */
     public void shuffle() {
-        
+        throw new UnsupportedOperationException("You still need to implement the"
+                + " shuffle method");
     }
-    
-    /**
-     * Draw a card from the top of the stack.
-     * 
-     * @return 
-     */
+
     public Card draw() {
         return deck.removeLast();
     }
-    
+
     /**
      * Place a card back at the beginning of the stack.
-     * 
-     * @param card 
+     *
+     * @param card
      */
     public void returnCard(DefaultCard card) {
         deck.addFirst(card);
     }
-    
+
     /**
-     * Gets all cards in the deck while maintaining the current (perhaps shuffled)
-     * order. Does not include cards that are not in the deck (e.g. on table).
-     * 
+     * Gets all cards in the deck while maintaining the current (perhaps
+     * shuffled) order. Does not include cards that are not in the deck (e.g. on
+     * table).
+     *
      * @return DefaultCard list containing all cards currently in the deck.
      */
     public List<DefaultCard> getAllCards() {
@@ -81,8 +78,8 @@ public class Deck implements CardCollection {
 
     /**
      * Prints each card in deck in order on a new line.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {

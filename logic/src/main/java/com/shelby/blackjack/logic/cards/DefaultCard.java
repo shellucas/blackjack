@@ -2,7 +2,6 @@ package com.shelby.blackjack.logic.cards;
 
 import com.shelby.blackjack.logic.cards.hands.Hand;
 
-import com.shellucas.casinoapi.cards.Card;
 import com.shellucas.casinoapi.cards.Ranks;
 import com.shellucas.casinoapi.cards.Suits;
 
@@ -12,7 +11,7 @@ import java.util.Objects;
  *
  * @author shelby
  */
-public class DefaultCard implements Card {
+public class DefaultCard implements HandModifierCard {
     
     private final Ranks RANK;
     private final Suits SUIT;
@@ -29,6 +28,7 @@ public class DefaultCard implements Card {
      * 
      * @param hand 
      */
+    @Override
     public void setAltTotal(Hand hand) {
         int totalExclThisCard = hand.soft.total(this);
         if (totalExclThisCard + this.softValue() > 21) {
@@ -39,11 +39,13 @@ public class DefaultCard implements Card {
     public boolean offerInsurance() {
         return false;
     }
-
+    
+    @Override
     public int softValue() {
         return this.RANK.getRank();
     }   
     
+    @Override
     public int hardValue() {
         return this.RANK.getRank();
     }

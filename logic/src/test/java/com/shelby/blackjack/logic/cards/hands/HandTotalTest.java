@@ -62,8 +62,8 @@ public class HandTotalTest {
         int result = hand.value();
         assertEquals(exp, result);
 
-        hand.addAndRecalculate(f.getCard(Ranks.KING, Suits.HEARTS));
-        hand.addAndRecalculate(f.getCard(Ranks.THREE, Suits.DIAMONDS));
+        hand.addAndRecalculateHand(f.getCard(Ranks.KING, Suits.HEARTS));
+        hand.addAndRecalculateHand(f.getCard(Ranks.THREE, Suits.DIAMONDS));
         exp = 13;
         result = hand.value();
         assertEquals(exp, result);
@@ -71,7 +71,7 @@ public class HandTotalTest {
         DefaultCard aceClubs = f.getCard(Ranks.ACE, Suits.CLUBS);
         DefaultCard kingDiamonds = f.getCard(Ranks.KING, Suits.DIAMONDS);
         hand = new Hand(player, bet, aceClubs);
-        hand.addAndRecalculate(kingDiamonds);
+        hand.addAndRecalculateHand(kingDiamonds);
 
         assertTrue(hand.getCards().get(0).getRANK() == Ranks.ACE);
         System.out.println(hand);
@@ -86,18 +86,18 @@ public class HandTotalTest {
         DefaultCard AceDiamonds = f.getCard(Ranks.ACE, Suits.DIAMONDS);
         DefaultCard AceHearts = f.getCard(Ranks.ACE, Suits.HEARTS);
 
-        hand.addAndRecalculate(threeDiamonds);
-        hand.addAndRecalculate(kingClubs);
+        hand.addAndRecalculateHand(threeDiamonds);
+        hand.addAndRecalculateHand(kingClubs);
         exp = 13;
         result = hand.value();
         assertEquals(exp, result);
 
-        hand.addAndRecalculate(AceDiamonds);
+        hand.addAndRecalculateHand(AceDiamonds);
         exp = 14;
         result = hand.value();
         assertEquals(exp, result);
 
-        hand.addAndRecalculate(AceHearts);
+        hand.addAndRecalculateHand(AceHearts);
         exp = 15;
         result = hand.value();
         assertEquals(exp, result);

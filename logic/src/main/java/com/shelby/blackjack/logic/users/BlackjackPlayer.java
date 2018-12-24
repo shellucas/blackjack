@@ -1,15 +1,14 @@
 package com.shelby.blackjack.logic.users;
 
-import com.shelby.blackjack.logic.cards.DefaultCard;
 import com.shelby.blackjack.logic.cards.hands.Hand;
 
 import com.shellucas.casinoapi.bets.Bet;
-import com.shellucas.casinoapi.cards.Card;
 import com.shellucas.casinoapi.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 import com.shellucas.casinoapi.bets.tables.BetPlacable;
+import com.shelby.blackjack.logic.cards.HandModifierCard;
 
 /**
  *
@@ -52,8 +51,8 @@ public class BlackjackPlayer implements Player {
     }
 
     public Hand split(Hand hand) {
-        Card removed = hand.removeLastCard();
-        Hand splitHand = new Hand(this, hand.getBet(), (DefaultCard) removed);
+        HandModifierCard removed = hand.removeLastCard();
+        Hand splitHand = new Hand(this, hand.getBet(), removed);
         hands.add(splitHand);
         return splitHand;
     }

@@ -45,4 +45,9 @@ public class PlayerBet implements Bet {
         return amount;
     }
 
+    @Override
+    public Outcome getOutcome() {
+        return this.outcome;
+    }
+
 }

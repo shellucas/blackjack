@@ -1,21 +1,22 @@
 package com.shelby.blackjack.logic.cards.hands;
 
-import com.shelby.blackjack.logic.cards.DefaultCard;
+import com.shelby.blackjack.logic.users.BlackjackPlayer;
+
 import com.shellucas.casinoapi.bets.Bet;
-import com.shellucas.casinoapi.cards.Card;
 import com.shellucas.casinoapi.cards.CardCollection;
 import com.shellucas.casinoapi.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.shelby.blackjack.logic.cards.HandModifierCard;
 
 /**
  *
  * @author shelby
  */
-public class Hand implements CardCollection {
+public class Hand implements CardCollection, Comparable<Hand> {
 
-    private List<Card> cards;
+    private List<HandModifierCard> cards;
     public HandHardTotal hard;
     public HandSoftTotal soft;
     private HandTotal altTotal;
@@ -40,9 +41,9 @@ public class Hand implements CardCollection {
      * @param ante
      * @param card
      */
-    public Hand(Player owner, Bet ante, DefaultCard card) {
+    public Hand(BlackjackPlayer owner, Bet ante, HandModifierCard card) {
         this(owner, ante);
-        this.addAndRecalculate(card);
+        this.addAndRecalculateHand(card);
     }
 
     /**
@@ -50,7 +51,7 @@ public class Hand implements CardCollection {
      *
      * @param cardToAdd
      */
-    public final void addAndRecalculate(DefaultCard cardToAdd) {
+    public final void addAndRecalculateHand(HandModifierCard cardToAdd) {
         this.cards.add(cardToAdd);
         cardToAdd.setAltTotal(this);
     }
@@ -87,7 +88,7 @@ public class Hand implements CardCollection {
      * 
      * @return 
      */
-    public Card removeLastCard() {
+    public HandModifierCard removeLastCard() {
         return this.getCards().remove(this.getCards().size() - 1);
     }
     
@@ -115,10 +116,6 @@ public class Hand implements CardCollection {
     public void setSplitDeclined() {
         this.splitDeclined = true;
     }
-    
-    public void split() {
-        
-    }
 
     /**
      * Sets the alt total to the passed hand total.
@@ -133,8 +130,8 @@ public class Hand implements CardCollection {
         return splitDeclined;
     }
     
-    public DefaultCard getUpCard() {
-        return (DefaultCard) this.cards.get(0);
+    public HandModifierCard getUpCard() {
+        return this.cards.get(0);
     }
 
     public Bet getBet() {
@@ -147,7 +144,6 @@ public class Hand implements CardCollection {
 
     /**
      * Amount of cards in the hand.
-     * 
      * @return 
      */
     @Override
@@ -157,17 +153,15 @@ public class Hand implements CardCollection {
     
     /**
      * Returns all cards in the hand as a list.
-     * 
      * @return 
      */
     @Override
-    public List<Card> getCards() {
+    public List<HandModifierCard> getCards() {
         return this.cards;
     }
     
     /**
      * Returns a string containing every card in the hand on a new line.
-     * 
      * @return 
      */
     @Override
@@ -175,6 +169,11 @@ public class Hand implements CardCollection {
         StringBuilder sb = new StringBuilder();
         this.cards.forEach((card) -> sb.append(card).append("\n") );
         return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Hand o) {
+        this.owner
     }
 
 }
