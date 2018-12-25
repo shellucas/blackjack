@@ -54,4 +54,10 @@ public class BlackjackTable implements BetPlacable {
         bets.add(bet);
     }
     
+    @Override
+    public Bet removeBet(Bet bet) {
+        bets.remove(bet);
+        return bet;
+    }
+    
 }

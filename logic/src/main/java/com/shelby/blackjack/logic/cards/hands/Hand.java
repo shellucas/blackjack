@@ -24,7 +24,7 @@ public class Hand implements CardCollection, Comparable<Hand> {
     private Player owner;
     private boolean splitDeclined;
 
-    public Hand(Player owner, Bet ante) {
+    public Hand(BlackjackPlayer owner, Bet ante) {
         this.cards = new ArrayList<>();
         hard = new HandHardTotal(this);
         soft = new HandSoftTotal(this);
@@ -173,7 +173,11 @@ public class Hand implements CardCollection, Comparable<Hand> {
 
     @Override
     public int compareTo(Hand o) {
-        this.owner
+        return this.value() - o.value();
     }
 
+    public BlackjackPlayer getOwner() {
+        return (BlackjackPlayer) owner;
+    }
+    
 }

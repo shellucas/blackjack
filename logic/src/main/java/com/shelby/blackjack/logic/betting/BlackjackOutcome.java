@@ -19,7 +19,7 @@ public class BlackjackOutcome implements Outcome {
      * would be initialized to 10 if the odds where 10:1 ( numerator :
      * denominator ).
      */
-    private final int odds;
+    private int odds;
     
     public BlackjackOutcome(String name, int odds) {
         this.name = name;
@@ -29,7 +29,7 @@ public class BlackjackOutcome implements Outcome {
     public String getName() {
         return name;
     }
-
+    
     public int getOdds() {
         return odds;
     }
@@ -63,6 +63,11 @@ public class BlackjackOutcome implements Outcome {
     @Override
     public int compareTo(Outcome o) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void alterOdds(int numerator) {
+        this.odds = numerator;
     }
     
 }

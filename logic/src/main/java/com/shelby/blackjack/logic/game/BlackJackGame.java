@@ -5,6 +5,7 @@ import com.shelby.blackjack.logic.cards.Shoe;
 import com.shelby.blackjack.logic.cards.hands.Hand;
 import com.shelby.blackjack.logic.users.BlackjackPlayer;
 import com.shelby.blackjack.table.BlackjackTable;
+import com.shellucas.casinoapi.bets.tables.BetPlacable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import java.util.Map;
  */
 public class BlackJackGame {
 
-    private BlackjackTable table;
+    private BetPlacable table;
     private Shoe shoe;
     private Hand dealer;
     private List<BlackjackPlayer> players;
@@ -43,7 +44,7 @@ public class BlackJackGame {
         this.table = table;
     }
 
-    public BlackjackTable getTable() {
+    public BetPlacable getTable() {
         return table;
     }
 
@@ -59,16 +60,22 @@ public class BlackJackGame {
         return players.add(player);
     }
 
+    /**
+     * Cycles one round of the game. In order; deal players, deal dealer, offer
+     * insurances, offer split hands, fill hands, check if dealer is busted if
+     * so non-bust hands, otherwise resolves all hands compared to dealer.
+     */
     public void cycle() {
         dealPlayers();
         dealToDealer();
         getInsurances();
         getSplits();
         fillHands();
-        // TODO 7 Resolve ante bets if dealer busts
-        
-        
-        // TODO 8 Resolve compare bets
+        if (dealerIsBust) {
+            resolveBust();
+        } else {
+            resolveHands();
+        }
     }
 
     /**
@@ -105,13 +112,41 @@ public class BlackJackGame {
     private void getInsurances() {
         DefaultCard upCard = (DefaultCard) dealer.getUpCard();
         if (upCard.offerInsurance()) {
-            getAllHands().forEach((player, hands) -> {
-                hands.forEach((hand) -> {
-                    player.insurance(hand);
-                });
-            });
+            insurance();
         }
     }
+    
+    /**
+     * Checks for each player if they have blackjack and offers insurance.
+     */
+    private void insurance() {
+        players.stream()
+                .map((player) -> player.getFirstHand())
+                .filter((playerHand) -> (playerHand.blackjack()))
+                .map((playerHand) -> {
+                    evenMoney(playerHand);
+                    return playerHand;
+                })
+                .forEachOrdered((playerHand) -> {
+                    // Hand bet may have been altered by even money
+                    playerHand.getOwner().win(playerHand.getBet());
+                });
+    }
+    
+    /**
+     * Offers insurance and if accepted handles insurance and returns true.
+     * @param thand
+     * @return 
+     */
+    private boolean evenMoney(Hand hand) {
+        if (hand.getOwner().evenMoney(hand)) {
+            hand.getBet().getOutcome().alterOdds(1);
+            hand.getOwner().win(hand.getBet());
+            return true;
+        } return false;
+    }
+    
+    
 
     /**
      * Offer to split hands and deal a card to the original and new hand.
@@ -142,17 +177,28 @@ public class BlackJackGame {
 
     /**
      * Offer choices to hit while not busted or choosing to stand pat.
+     *
      * @param player
-     * @param hand 
+     * @param hand
      */
     private void offerChoices(BlackjackPlayer player, Hand hand) {
         while (true) {
-            if (hand.busted()) { break; }
-            if (player.hit(hand)) { hand.addAndRecalculateHand(shoe.deal()); } 
-            else if (player.standPat()) { break; }
+            if (hand.busted())  break;
+            
+            if (player.doubleDown(hand)) {
+                player.hit(hand);
+                hand.addAndRecalculateHand(shoe.deal());
+                break;
+            }
+            
+            if (player.hit(hand)) {
+                hand.addAndRecalculateHand(shoe.deal());
+            } else if (player.standPat()) {
+                break;
+            }
         }
     }
-    
+
     /**
      * Fill dealer until busted or hand's value is over 16.
      */
@@ -168,14 +214,24 @@ public class BlackJackGame {
             }
         }
     }
-    
+
     private void resolveBust() {
         getAllHands().forEach((player, hands) -> {
-            for (Hand hand : hands) {
-                if (!hand.busted() && ) {
-                    
+            hands.stream()
+                    .filter((hand) -> (!hand.busted()))
+                    .forEachOrdered((hand) -> player.win(hand.getBet()));
+        });
+    }
+
+    private void resolveHands() {
+        getAllHands().forEach((player, hands) -> {
+            hands.forEach((hand) -> {
+                if (hand.busted() || hand.compareTo(dealer) <= 0) {
+                    player.lose(hand.getBet());
+                } else {
+                    player.win(hand.getBet());
                 }
-            }
+            });
         });
     }
 
@@ -193,4 +249,16 @@ public class BlackJackGame {
         return hands;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Blackjack status").append("\n");
+        sb.append("Dealers hand: ").append(dealer);
+        getAllHands().forEach((player, hands) -> {
+            sb.append(player).append(" hands: ");
+            hands.forEach((hand) -> sb.append(hand).append("\n"));
+        });
+        return sb.toString();
+    }
+    
 }

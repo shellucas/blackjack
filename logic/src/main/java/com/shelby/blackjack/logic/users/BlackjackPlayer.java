@@ -9,18 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 import com.shellucas.casinoapi.bets.tables.BetPlacable;
 import com.shelby.blackjack.logic.cards.HandModifierCard;
+import com.shelby.blackjack.table.BlackjackTable;
 
 /**
- *
+ * Represents a blackjack player. In this case this class represents the default
+ * behavior of a dealer. It is suitable to make use of inheritance to make new
+ * strategy players(simulations) or real players by the use of this class.
+ * 
  * @author shelby
  */
 public class BlackjackPlayer implements Player {
 
-    private double stake;
-    private BetPlacable table;
+    private final BetPlacable table;
     private List<Hand> hands;
+    private double stake;
 
-    public BlackjackPlayer(double stake, BetPlacable table) {
+    public BlackjackPlayer(double stake, BlackjackTable table) {
         this.stake = stake;
         this.table = table;
         this.hands = new ArrayList<>();
@@ -34,22 +38,28 @@ public class BlackjackPlayer implements Player {
     }
     
     /**
-     * Returns the first hand of the player (most often used unless split).
-     * 
+     * Answer to requested even money.
+     * @param hand
      * @return 
      */
-    public Hand getFirstHand() {
-        return hands.get(0);
-    }
-
     public boolean evenMoney(Hand hand) {
         return false;
     }
 
+    /**
+     * Answer to requested insurance.
+     * @param hand
+     * @return 
+     */
     public boolean insurance(Hand hand) {
         return false;
     }
 
+    /**
+     * Split hand into two hands.
+     * @param hand
+     * @return 
+     */
     public Hand split(Hand hand) {
         HandModifierCard removed = hand.removeLastCard();
         Hand splitHand = new Hand(this, hand.getBet(), removed);
@@ -57,14 +67,28 @@ public class BlackjackPlayer implements Player {
         return splitHand;
     }
 
+    /**
+     * Player decides to double down the bets.
+     * @param hand
+     * @return 
+     */
     public boolean doubleDown(Hand hand) {
         return false;
     }
 
+    /**
+     * Player decides to hit on the passed hand.
+     * @param hand
+     * @return 
+     */
     public boolean hit(Hand hand) {
         return hand.value() < 17;
     }
     
+    /**
+     * Player decides not the hit.
+     * @return 
+     */
     public boolean standPat() {
         return true;
     }
@@ -82,12 +106,14 @@ public class BlackjackPlayer implements Player {
 
     @Override
     public void win(Bet wonBet) {
-        setStake(getStake() + wonBet.getAmount());
+        setStake(getStake() + wonBet.winAmount());
+        table.removeBet(wonBet);
     }
 
     @Override
     public void lose(Bet lostBet) {
-        setStake(getStake() - lostBet.getAmount());
+        setStake(getStake() - lostBet.loseAmount());
+        table.removeBet(lostBet);
     }
 
     @Override
@@ -103,24 +129,45 @@ public class BlackjackPlayer implements Player {
         return sb.toString();
     }
 
+    /**
+     * Returns the current stake.
+     * @return 
+     */
     public double getStake() {
         return stake;
     }
 
+    /**
+     * Returns the table.
+     * @return 
+     */
     public BetPlacable getTable() {
         return table;
     }
 
+    /**
+     * Alters the stakes.
+     * @param stake 
+     */
     public void setStake(double stake) {
         this.stake = stake;
     }
 
-    public void setTable(BetPlacable table) {
-        this.table = table;
-    }
-    
+    /**
+     * Returns all Hands
+     * @return 
+     */
     public List<Hand> getHands() {
         return hands;
+    }
+
+    /**
+     * Returns the first hand of the player (most often used unless split).
+     * 
+     * @return 
+     */
+    public Hand getFirstHand() {
+        return hands.get(0);
     }
 
 }
