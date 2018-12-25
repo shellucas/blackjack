@@ -26,6 +26,16 @@ public class BlackjackOutcome implements Outcome {
         this.odds = odds;
     }
 
+    @Override
+    public double winAmount(double betAmount) {
+        return betAmount * this.odds;
+    }
+
+    @Override
+    public void alterOdds(int numerator) {
+        this.odds = numerator;
+    }
+
     public String getName() {
         return name;
     }
@@ -55,19 +65,4 @@ public class BlackjackOutcome implements Outcome {
         return "The odds of placing on " + this.name + " are 1:" + this.odds;
     }
 
-    @Override
-    public double winAmount(double betAmount) {
-        return betAmount * this.odds;
-    }
-
-    @Override
-    public int compareTo(Outcome o) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void alterOdds(int numerator) {
-        this.odds = numerator;
-    }
-    
 }

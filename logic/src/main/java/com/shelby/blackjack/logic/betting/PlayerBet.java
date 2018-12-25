@@ -28,7 +28,7 @@ public class PlayerBet implements Bet {
 
     @Override
     public double winAmount() {
-        return outcome.winAmount(amount) + amount;
+        return outcome.winAmount(amount) + amount - price();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class PlayerBet implements Bet {
 
     @Override
     public double price() {
-        return amount;
+        return 0;
     }
 
     @Override

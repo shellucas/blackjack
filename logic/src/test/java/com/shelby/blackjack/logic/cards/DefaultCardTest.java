@@ -5,6 +5,11 @@
  */
 package com.shelby.blackjack.logic.cards;
 
+import com.shelby.blackjack.logic.betting.BlackjackOutcome;
+import com.shelby.blackjack.logic.betting.PlayerBet;
+import com.shelby.blackjack.logic.cards.hands.Hand;
+import com.shelby.blackjack.logic.users.BlackjackPlayer;
+import com.shelby.blackjack.table.BlackjackTable;
 import com.shellucas.casinoapi.cards.Ranks;
 import com.shellucas.casinoapi.cards.Suits;
 import org.junit.After;
@@ -20,6 +25,8 @@ import static org.junit.Assert.*;
  */
 public class DefaultCardTest {
     
+    DefaultCard card;
+    
     public DefaultCardTest() {
     }
     
@@ -33,6 +40,7 @@ public class DefaultCardTest {
     
     @Before
     public void setUp() {
+        card = new DefaultCard(Suits.SPADES, Ranks.TWO);
     }
     
     @After
@@ -44,13 +52,34 @@ public class DefaultCardTest {
      */
     @Test
     public void testSoftValue() {
+ 
         System.out.println("softValue");
-        DefaultCard instance = null;
-        int expResult = 0;
-        int result = instance.softValue();
+        int expResult = 2;
+        int result = card.softValue();
         assertEquals(expResult, result);
+        
+        card = new DefaultCard(Suits.CLUBS, Ranks.TEN);
+        expResult = 10;
+        result = card.softValue();
+        assertEquals(expResult, result);
+        
+        card = new DefaultCard(Suits.CLUBS, Ranks.JACK);
+        expResult = 11;
+        result = card.softValue();
+        assertEquals(expResult, result);
+        
+        card = new DefaultCard(Suits.CLUBS, Ranks.KING);
+        expResult = 13;
+        result = card.softValue();
+        assertEquals(expResult, result);
+        
+        card = new DefaultCard(Suits.CLUBS, Ranks.ACE);
+        expResult = 1;
+        result = card.softValue();
+        assertEquals(expResult, result);
+        
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        fail("The test case is a prototype.");
     }
 
     /**
@@ -59,69 +88,48 @@ public class DefaultCardTest {
     @Test
     public void testHardValue() {
         System.out.println("hardValue");
-        DefaultCard instance = null;
-        int expResult = 0;
-        int result = instance.hardValue();
+        int expResult = 2;
+        int result = card.hardValue();
+        assertEquals(expResult, result);
+        
+        card = new DefaultCard(Suits.CLUBS, Ranks.TEN);
+        expResult = 10;
+        result = card.hardValue();
+        assertEquals(expResult, result);
+        
+        card = new DefaultCard(Suits.CLUBS, Ranks.JACK);
+        expResult = 11;
+        result = card.hardValue();
+        assertEquals(expResult, result);
+        
+        card = new DefaultCard(Suits.CLUBS, Ranks.KING);
+        expResult = 13;
+        result = card.hardValue();
+        assertEquals(expResult, result);
+        
+        card = new DefaultCard(Suits.CLUBS, Ranks.ACE);
+        expResult = 1;
+        result = card.hardValue();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getRANK method, of class DefaultCard.
-     */
-    @Test
-    public void testGetRANK() {
-        System.out.println("getRANK");
-        DefaultCard instance = null;
-        Ranks expResult = null;
-        Ranks result = instance.getRANK();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getSUIT method, of class DefaultCard.
-     */
-    @Test
-    public void testGetSUIT() {
-        System.out.println("getSUIT");
-        DefaultCard instance = null;
-        Suits expResult = null;
-        Suits result = instance.getSUIT();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of hashCode method, of class DefaultCard.
-     */
-    @Test
-    public void testHashCode() {
-        System.out.println("hashCode");
-        DefaultCard instance = null;
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of equals method, of class DefaultCard.
-     */
-    @Test
-    public void testEquals() {
-        System.out.println("equals");
-        Object obj = null;
-        DefaultCard instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        fail("The test case is a prototype.");
     }
     
+    /**
+     * Test of setAltTotal method, of class DefaultCard.
+     */
+    @Test
+    public void testSetAltTotal() {
+        System.out.println("setAltTotal");
+        Hand hand = new Hand(
+                new BlackjackPlayer(1000, new BlackjackTable())
+                , new PlayerBet(10, new BlackjackOutcome("Test", 10)
+                , new BlackjackPlayer(1000, new BlackjackTable())));
+        card.setAltTotal(hand);
+        
+        
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+    }
+
 }

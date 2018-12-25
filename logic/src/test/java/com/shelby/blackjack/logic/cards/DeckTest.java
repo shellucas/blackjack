@@ -94,5 +94,73 @@ public class DeckTest {
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of shuffle method, of class Deck.
+     */
+    @Test
+    public void testShuffle() {
+        System.out.println("shuffle");
+        Deck instance = new Deck();
+        instance.shuffle();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAllCards method, of class Deck.
+     */
+    @Test
+    public void testGetAllCards() {
+        System.out.println("getAllCards");
+        Deck instance = new Deck();
+        List<DefaultCard> expResult = null;
+        List<DefaultCard> result = instance.getAllCards();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of size method, of class Deck.
+     */
+    @Test
+    public void testSize() {
+        System.out.println("size");
+        Deck instance = new Deck();
+        int expResult = 0;
+        int result = instance.size();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getCards method, of class Deck.
+     */
+    @Test
+    public void testGetCards() {
+        System.out.println("getCards");
+        Deck instance = new Deck();
+        List<Card> expResult = null;
+        List<Card> result = instance.getCards();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of toString method, of class Deck.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        Deck instance = new Deck();
+        String expResult = "";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

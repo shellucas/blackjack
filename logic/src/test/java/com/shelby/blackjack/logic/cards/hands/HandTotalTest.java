@@ -107,4 +107,44 @@ public class HandTotalTest {
 ////        fail("Fail");
 //    }
 
+    /**
+     * Test of getHand method, of class HandTotal.
+     */
+    @Test
+    public void testGetHand() {
+        System.out.println("getHand");
+        HandTotal instance = null;
+        Hand expResult = null;
+        Hand result = instance.getHand();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of total method, of class HandTotal.
+     */
+    @Test
+    public void testTotal() {
+        System.out.println("total");
+        DefaultCard cardToOmit = null;
+        HandTotal instance = null;
+        int expResult = 0;
+        int result = instance.total(cardToOmit);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    public class HandTotalImpl extends HandTotal {
+
+        public HandTotalImpl() {
+            super(null);
+        }
+
+        public int total(DefaultCard cardToOmit) {
+            return 0;
+        }
+    }
+
 }

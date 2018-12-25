@@ -72,5 +72,19 @@ public class CardFactoryTest {
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of getCardCollection method, of class CardFactory.
+     */
+    @Test
+    public void testGetCardCollection() {
+        System.out.println("getCardCollection");
+        CardFactory instance = new CardFactory();
+        Deck expResult = null;
+        Deck result = instance.getCardCollection();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

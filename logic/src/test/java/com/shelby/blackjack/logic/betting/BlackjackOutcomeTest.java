@@ -19,6 +19,10 @@ import static org.junit.Assert.*;
  */
 public class BlackjackOutcomeTest {
     
+    BlackjackOutcome outcome;
+    final String name = "TestOutcome1";
+    final int odds = 3;
+    
     public BlackjackOutcomeTest() {
     }
     
@@ -32,67 +36,11 @@ public class BlackjackOutcomeTest {
     
     @Before
     public void setUp() {
+        this.outcome = new BlackjackOutcome(name, odds);
     }
     
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of getName method, of class BlackjackOutcome.
-     */
-    @Test
-    public void testGetName() {
-        System.out.println("getName");
-        BlackjackOutcome instance = null;
-        String expResult = "";
-        String result = instance.getName();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getOdds method, of class BlackjackOutcome.
-     */
-    @Test
-    public void testGetOdds() {
-        System.out.println("getOdds");
-        BlackjackOutcome instance = null;
-        int expResult = 0;
-        int result = instance.getOdds();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of hashCode method, of class BlackjackOutcome.
-     */
-    @Test
-    public void testHashCode() {
-        System.out.println("hashCode");
-        BlackjackOutcome instance = null;
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of equals method, of class BlackjackOutcome.
-     */
-    @Test
-    public void testEquals() {
-        System.out.println("equals");
-        Object obj = null;
-        BlackjackOutcome instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -101,12 +49,12 @@ public class BlackjackOutcomeTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        BlackjackOutcome instance = null;
-        String expResult = "";
-        String result = instance.toString();
+        System.out.println(outcome);
+        String expResult = "The odds of placing on TestOutcome1 are 1:3";
+        String result = outcome.toString();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        fail("The test case is a prototype.");
     }
 
     /**
@@ -115,28 +63,12 @@ public class BlackjackOutcomeTest {
     @Test
     public void testWinAmount() {
         System.out.println("winAmount");
-        double betAmount = 0.0;
-        BlackjackOutcome instance = null;
-        double expResult = 0.0;
-        double result = instance.winAmount(betAmount);
+        double betAmount = 20.0;
+        double expResult = 60.0;
+        double result = outcome.winAmount(betAmount);
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of compareTo method, of class BlackjackOutcome.
-     */
-    @Test
-    public void testCompareTo() {
-        System.out.println("compareTo");
-        Outcome o = null;
-        BlackjackOutcome instance = null;
-        int expResult = 0;
-        int result = instance.compareTo(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        fail("The test case is a prototype.");
     }
 
     /**
@@ -145,11 +77,17 @@ public class BlackjackOutcomeTest {
     @Test
     public void testAlterOdds() {
         System.out.println("alterOdds");
-        int numerator = 0;
-        BlackjackOutcome instance = null;
-        instance.alterOdds(numerator);
+        double betAmount = 20.0;
+        double expResult = 60.0;
+        double result = outcome.winAmount(betAmount);
+        assertEquals(expResult, result, 0.0);
+        
+        outcome.alterOdds(5);
+        expResult = 100.0;
+        result = outcome.winAmount(betAmount);
+        assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        fail("The test case is a prototype.");
     }
     
 }
