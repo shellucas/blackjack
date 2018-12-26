@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * @author shelby
  */
-public class BlackJackGame {
+public class BlackjackGame {
 
     private BetPlacable table;
     private Shoe shoe;
@@ -31,7 +31,7 @@ public class BlackJackGame {
      * @param shoe
      * @param dealer
      */
-    public BlackJackGame(Shoe shoe, Hand dealer) {
+    public BlackjackGame(Shoe shoe, Hand dealer) {
         this.shoe = shoe;
         this.players = new ArrayList<>();
         this.table = new BlackjackTable(1000, 10);
@@ -39,7 +39,7 @@ public class BlackJackGame {
         this.dealerIsBust = false;
     }
 
-    public BlackJackGame(Shoe shoe, Hand dealer, BlackjackTable table) {
+    public BlackjackGame(Shoe shoe, Hand dealer, BlackjackTable table) {
         this(shoe, dealer);
         this.table = table;
     }

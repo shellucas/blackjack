@@ -102,8 +102,37 @@ public class CardBlackBoxTest {
         assertTrue(card5.hardValue() == 1);
         
         /**
-         * Test Alt Total
+         * Test alttotal, busted and blackjack
          */
+        // method calls setalttotal
+        hand.addAndRecalculateHand(card1);
+        assertTrue(hand.value() == 2);
+        hand.addAndRecalculateHand(card3);
+        assertTrue(hand.value() == 12);
+        hand.addAndRecalculateHand(card5);
+        assertTrue(hand.value() == 13);
         
+        hand = new Hand(player, bet);
+        hand.addAndRecalculateHand(card5);
+        assertTrue(hand.value() == 11);
+        hand.addAndRecalculateHand(card3);
+        assertTrue(hand.value() == 21);
+        assertTrue(hand.blackjack());
+        
+        hand = new Hand(player, bet);
+        hand.addAndRecalculateHand(card3); // jack
+        hand.addAndRecalculateHand(card2); // four
+        hand.addAndRecalculateHand(card2); // four
+        hand.addAndRecalculateHand(card1); // two
+        hand.addAndRecalculateHand(card5); // ace
+        assertFalse(hand.busted());
+        assertFalse(hand.blackjack());
+        assertTrue(hand.value() == 21);
+        
+        hand = new Hand(player, bet);
+        hand.addAndRecalculateHand(card3); // jack
+        hand.addAndRecalculateHand(card4); // king
+        hand.addAndRecalculateHand(card1); // two
+        assertTrue(hand.busted());
     }
 }
